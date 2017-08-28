@@ -180,4 +180,4 @@ dans le fichier, écrire
 {
   "directory": "web/bower_assets"
 }
-> bower install bootstrap
+> bower install bootstrap --save
