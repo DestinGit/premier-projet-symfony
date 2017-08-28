@@ -11,19 +11,22 @@
     </head>
     <body class="container-fluid">
         <header>
-            {% block header %}{% endblock %}
+            {% block header %}ICI MON SUPER SITE{% endblock %}
         </header>
         <nav>
-            {% block nav %}{% endblock %}
+            {% block nav %}ICI LA NAVIGATION{% endblock %}
         </nav>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+        <main class="row">
+            <div class="col-md-6 col-md-offset-2">
                 {% block body %}{% endblock %}
             </div>
-        </div>
+            <aside class="col-md-3 col-md-offset-1">
+                {% block aside %}ICI LA PUB{% endblock %}
+            </aside>
+        </main>
 
         <footer>
-            {% block footer %}{% endblock %}
+            {% block footer %}ICI MON FOOTER{% endblock %}
         </footer>
 
         {% block javascripts %}
