@@ -166,3 +166,18 @@ ou
 > php bin/console debug:router --env=prod --show-controllers
 pour l'exporter vers un fichier, 
 > php bin/console debug:router > routes.txt
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------------- GESTION DES DEPENDANCES JS - BOWER----------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Installer NodeJS puis installer BOWER
+> npm install -g bower
+> bower init
+Dans la racine du premier-projet, créer un fichier .bowerrc
+dans le fichier, écrire 
+{
+  "directory": "web/bower_assets"
+}
+> bower install bootstrap

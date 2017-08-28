@@ -1,0 +1,17 @@
+{
+  "name": "premier-projet",
+  "homepage": "https://github.com/DestinGit/premier-projet-symfony",
+  "authors": [
+    "formation <bak1tino@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
