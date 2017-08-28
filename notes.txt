@@ -1,0 +1,168 @@
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------- SYMFONY INSTALLATION ET DEMARRAGE  ---------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+- installer git
+- installer php (via xamp ou autre)
+- installer composer
+- https://symfony/installer (celui-ci télécharge symfony.phar)
+- copier ce fichier dans un dossier de notre projet
+- mettre php dans les variables d'environnement
+- Sur la console, taper la commande :
+ > php symfony.phar
+
+si erreur suivante :
+symfony ssl certificate problem unable to get local issuer certificate
+alors aller sur ce lien :
+https://stackoverflow.com/questions/37997669/curl-error-60-ssl-certification-issue-when-attempting-to-use-symfony
+(
+	Follow this link, Copy the entire page and save it in a: "cacert.pem"
+
+	Then in your php.ini file insert or edit the following line: curl.cainfo = "[pathtothisfile]\cacert.pem"
+
+	Or
+
+	use composer instead Symfony installer
+)
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---------------- CREATION PROJET ET LANCEMENT SERVEUR --------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+- Pour créer un nouveau projet :
+> php symfony.phar new premier-projet
+
+- pour lancer le server symfony, se placer dans le dossier de notre projet et taper :
+ > bin/console server:run
+ 
+ remarque: dans bin/console se trouve toutes les commandes console de symfony
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+---------------- ROUTE ET ACTION DANS LE CONTROLLER ----------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Il est possible de définir les routes dans les annotations de l'action.
+exemple:
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+    /**
+     * @Route("/", name="homepage")
+     */
+public function indexAction(Request $request){}
+     * @Route(
+     *        "/hello/{name}/{age}",
+     *        defaults={"name": "World", "age": 0},
+     *        requirements={"age":"\d{1,3}", "name":"\D+"}
+     *      )
+public function helloAction($name) {return new Response('hello ' . $name);}
+
+Il est aussi possible de mettre plusieurs routes qui vont réagir à la même action
+il suffit d'ajouter une autre annotation pour la 2e route.
+Exemple
+/**
+* @Route() route 1
+* @Route() route 2
+*
+*/
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------------- PLUGIN DANS PHPSTORM -----------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+- FRAMEWORK INTEGRATION
+Ensuite, Aller dans settings->framework et php->symfony, cocher Enable...
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------------- LES VIEWS -----------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Par defaults, on met les views dans app/resources/[dossier du controller]/view.html.twig
+Mais si on pense créer un bundle réutilisable, on mettra les vues dans le dossier de notre
+bundle
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------------- CONTROLLER CREATION ------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Pour créer un controller:
+$ bin/console generate:controller
+
+Exemple : 
+$ bin/console generate:controller
+
+
+  Welcome to the Symfony controller generator
+
+
+
+Every page, and even sections of a page, are rendered by a controller.
+This command helps you generate them easily.
+
+First, you need to give the controller name you want to generate.
+You must use the shortcut notation like AcmeBlogBundle:Post
+
+Controller name: AppBundle:Calculator
+
+Determine the format to use for the routing.
+
+Routing format (php, xml, yml, annotation) [annotation]:
+
+Determine the format to use for templating.
+
+Template format (twig, php) [twig]:
+
+Instead of starting with a blank controller, you can add some actions now. An action
+is a PHP function or method that executes, for example, when a given route is matched.
+Actions should be suffixed by Action.
+
+
+New action name (press <return> to stop adding actions): addAction
+Action route [/add]: /add/{n1}/{n2}
+Template name (optional) [AppBundle:Calculator:add.html.twig]: :calculator:add.html.twig
+
+New action name (press <return> to stop adding actions):
+
+
+  Summary before generation
+
+
+You are going to generate a "AppBundle:Calculator" controller
+using the "annotation" format for the routing and the "twig" format
+for templating
+Do you confirm generation [yes]?
+
+
+  Controller generation
+
+
+  created .\src\AppBundle/Resources/views/calculator/
+  created .\src\AppBundle/Resources/views/calculator/add.html.twig
+  created .\src\AppBundle/Controller/CalculatorController.php
+  created .\src\AppBundle/Tests/Controller/
+  created .\src\AppBundle/Tests/Controller/CalculatorControllerTest.php
+Generating the bundle code: OK
+
+
+  Everything is OK! Now get to work :).
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+----------------------- ROUTING ------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Connaitre toutes les routes de l'application:
+
+> php bin/console debug:router
+ou
+> php bin/console debug:router --env=prod
+ou
+> php bin/console debug:router --env=prod --show-controllers
+pour l'exporter vers un fichier, 
+> php bin/console debug:router > routes.txt
