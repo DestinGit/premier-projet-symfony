@@ -1,0 +1,9 @@
+ ---------------------- -------- -------- ------ --------------------- ---------------------------- 
+  Name                   Method   Scheme   Host   Path                  Controller                  
+ ---------------------- -------- -------- ------ --------------------- ---------------------------- 
+  app_calculator_add     ANY      ANY      ANY    /add/{n1}/{n2}        AppBundle:Calculator:add    
+  homepage               ANY      ANY      ANY    /                     AppBundle:Default:index     
+  app_default_hello      ANY      ANY      ANY    /hello/{name}/{age}   AppBundle:Default:hello     
+  app_default_ajaxuser   ANY      ANY      ANY    /api/user             AppBundle:Default:ajaxuser  
+ ---------------------- -------- -------- ------ --------------------- ---------------------------- 
+
