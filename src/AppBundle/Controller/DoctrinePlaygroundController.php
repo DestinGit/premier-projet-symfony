@@ -35,15 +35,31 @@ class DoctrinePlaygroundController extends Controller
     }
 
     /**
-     * @Route("/book-list")
+     * @Route("/book-list", name="book_list")
      */
     public function indexAction()
     {
+        $repository = $this->getDoctrine()->getRepository("AppBundle:Book");
+
+        $bookList = $repository->findAll();
+
         return $this->render('AppBundle:DoctrinePlayground:index.html.twig', array(
-            // ...
+            'books' => $bookList
         ));
     }
 
+    /**
+     * @Route("/book-details/{id}", name="book_details")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function detailsAction($id) {
+        $repository = $this->getDoctrine()->getRepository("AppBundle:Book");
+
+        $book = $repository->find($id);
+
+        return $this->render("AppBundle:DoctrinePlayground:detail.html.twig", ['book' => $book]);
+    }
     private function addBook(): void
     {
 // Création d'une entité book

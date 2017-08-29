@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+{% block title %}
+    AppBundle:DoctrinePlayground:detail
+{% endblock %}
+
+{% block body %}
+    <p>
+        <a href="{{ path('book_list') }}">Retour</a>
+    </p>
+    {{ dump(book) }}
+{% endblock %}

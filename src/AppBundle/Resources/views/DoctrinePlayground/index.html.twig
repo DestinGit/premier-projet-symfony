@@ -4,4 +4,10 @@
 
 {% block body %}
 <h1>Welcome to the DoctrinePlayground:index page</h1>
+
+    {% for book in books %}
+        <li>
+            <a href="{{ path('book_details', { id:book.id }) }}">{{ book.title }}</a>
+        </li>
+    {% endfor %}
 {% endblock %}
