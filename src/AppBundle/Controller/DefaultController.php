@@ -23,7 +23,7 @@ class DefaultController extends Controller
 
     /**
      * @Route(
-     *        "/hello/{name}/{age}",
+     *        "/hello/{name}/{age}", name="hello",
      *        defaults={"name": "World", "age": 0},
      *        requirements={"age":"\d{1,3}", "name":"\D+"}
      *      )

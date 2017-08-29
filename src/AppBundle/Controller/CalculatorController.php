@@ -9,7 +9,7 @@ class CalculatorController extends Controller
 {
     /**
      * @Route(
-     *     "/add/{n1}/{n2}",
+     *     "/add/{n1}/{n2}", name="calculator_add_and_misc",
      *     defaults={"n1":1, "n2":2},
      *     requirements={"n1":"\d+", "n2":"\d+"}
      *      )
