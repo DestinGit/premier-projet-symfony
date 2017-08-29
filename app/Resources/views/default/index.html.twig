@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {#Consommation du message flashBag#}
+    {{ dump(app.session.flashBag) }}
+
+    {% if app.session.flashBag.get('info') is defined %}
+        <ul>
+            {% for message in app.session.flashBag.get('info') %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div id="wrapper">
         <div id="container">
             <div id="welcome">

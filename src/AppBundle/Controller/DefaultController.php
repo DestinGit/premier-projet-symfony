@@ -30,6 +30,10 @@ class DefaultController extends Controller
      * @return Response
      */
     public function helloAction(Request $request, $name, $age) {
+        // Création d'un message flash
+        $this->addFlash("info", "Je vous ai flashé à 9600 bps");
+
+
         $key = $request->get('key');
 
         if ($key == '123') {
