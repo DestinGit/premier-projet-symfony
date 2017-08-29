@@ -5,4 +5,67 @@
 {% block body %}
 <h1>Welcome to the Calculator:add page</h1>
     {{ n1 }} plus {{ n2 }} est égal à {{ result }}
+
+    {{ dump(ctrl) }}
+
+    {{ yesterday|date('d/m/Y') }}
+
+    {{ "now"|date("m/d/Y") }}
+
+    <ul>
+        {% for item in list | sort | slice(0,3) %}
+            <li>{{ item }}</li>
+        {% else %}
+            <li>Aucun élément dans la liste</li>
+        {% endfor %}
+    </ul>
+
+    {#Deux facon d'appliquer des filtres#}
+    <p>
+        {#filter 1#}
+        {% filter upper %}
+            hello {{name}}
+        {% endfilter %}
+        {# filter 2 et concatenation dans twig #}
+        {{ 'hello' ~ name | upper }}
+    </p>
+
+    {#Faire une boucle incrémentielle#}
+    <p>
+        {% for n in 1..10 %}
+            {{ n }}
+        {% endfor %}
+    </p>
+    <p>
+        {% for n in 'a'..'f' %}
+            {{ n }}
+        {% endfor %}
+    </p>
+
+    {#Faire une boucle incrémentielle par pas de 2#}
+    <p>
+        {% for n in 1..20 if n % 2 == 0 %}
+            {{ n }}
+        {% endfor %}
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {% for colName in clients[0] | keys %}
+                    <th>{{ colName }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                {% for colName in client | keys %}
+                    <td>{{ client[colName] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

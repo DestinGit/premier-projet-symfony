@@ -13,9 +13,11 @@
         <header>
             {% block header %}ICI MON SUPER SITE{% endblock %}
         </header>
-        <nav>
-            {% block nav %}ICI LA NAVIGATION{% endblock %}
-        </nav>
+
+            {% block nav %}
+                {{ include('_partials/navbar.html.twig') }}
+            {% endblock %}
+
         <main class="row">
             <div class="col-md-6 col-md-offset-2">
                 {% block body %}{% endblock %}
