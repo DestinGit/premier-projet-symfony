@@ -13,21 +13,21 @@ class DoctrinePlaygroundController extends Controller
      */
     public function newBookAction()
     {
-        // Création d'une entité book
-        $book = new Book();
-        $book->setTitle("SQL for smarties")
-             ->setAuthor('Joe Celko')
-            ->setPrice(54.8)
-            ->setPublishedAt(new \DateTime("2000-01-25"));
+//        $this->addBook();
 
-        // Récupération d'une instance du gestionnaire d'entité
+        // Récupération de data avec Entity Repository
+        $repository = $this->getDoctrine()
+            ->getRepository("AppBundle:Book");
+        $book = $repository->find(2);
+
+        // Modification
+        $book->setTitle("Advanced SQL");
+
+        // Persistance de data avec Entity Manager
         $em = $this->getDoctrine()->getManager();
-
-        // Persistance de l'entité
         $em->persist($book);
-
-        //  Validation de la transaction
         $em->flush();
+
 
         return $this->render('AppBundle:DoctrinePlayground:new_book.html.twig', array(
             // ...
@@ -42,6 +42,25 @@ class DoctrinePlaygroundController extends Controller
         return $this->render('AppBundle:DoctrinePlayground:index.html.twig', array(
             // ...
         ));
+    }
+
+    private function addBook(): void
+    {
+// Création d'une entité book
+        $book = new Book();
+        $book->setTitle("SQL for smarties")
+            ->setAuthor('Joe Celko')
+            ->setPrice(54.8)
+            ->setPublishedAt(new \DateTime("2000-01-25"));
+
+        // Récupération d'une instance du gestionnaire d'entité
+        $em = $this->getDoctrine()->getManager();
+
+        // Persistance de l'entité
+        $em->persist($book);
+
+        //  Validation de la transaction
+        $em->flush();
     }
 
 }
