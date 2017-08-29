@@ -181,3 +181,53 @@ dans le fichier, écrire
   "directory": "web/bower_assets"
 }
 > bower install bootstrap --save
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+------------------------------- DOCTRINE ---------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+DOCTRINE est un ORM (Object Relational Mapper)
+DBAL (Database Access Layer)
+1ere chose à faire pour utiliser DOCTRINE
+configurer le fichier : app/config/parameters.yml
+parameters:
+database_host: 127.0.0.1
+database_port: null
+database_name: symfony
+database_user: root
+database_password: null
+
+Utilisation de plusieurs BDD dans DOCTRINE, voir lien :
+http://www.dinduks.com/symfony2-utiliser-plusieurs-bases-de-donnees/
+
+Etape 1:
+Définir les entités. Exemple:
+class Auteur {
+	private $id;
+	private $surname;
+	private $name;
+	private $email;
+	private $password;
+	
+	// Avec les guetters et les setters
+}
+Pour générer les entités et les getters et setters
+Commande console
+php bin/console doctrine:generate:entity
+
+Activer : extension=php_pdo_mysql.dll
+Démarrer: mysql
+
+Pour créer la BDD :
+> php bin/console doctrine:database:create
+Pour générer les entités
+> php bin/console doctrine:generate:entity
+et réponse aux questions
+
+Dans les Entity se trouveront la définition de nos classes
+Dans les class Repository c'est la que se trouveront nos requetes
+
+Pour créer le Schema de la bases-de-donnees
+> php bin/console doctrine:schema:create
+si modification sur le schema, faire > php bin/console doctrine:schema:update --force
