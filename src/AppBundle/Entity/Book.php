@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
  *
  * @ORM\Table(name="books")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BookRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Book
 {
@@ -24,20 +26,27 @@ class Book
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="le titre ne peut être vide")
+     * @Assert\Length(min="3", max="80",
+     *     minMessage="Le titre doit comporter plus de {{limit}} caractères",
+     *     maxMessage="Le titre doit comporter moins de {{limit}} caractères"
+     *      )
      * @ORM\Column(name="title", type="string", length=80)
      */
     private $title;
 
     /**
      * @var ArrayCollection
+     * @Assert\Count(min="1", max="4",
+     *     minMessage="Un livre doit avoir au moins {{limit}} auteur(s)",
+     *     maxMessage="Un livre doit avoir au plus {{limit}} auteur(s)")
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Author", inversedBy="books", cascade={"persist"})
      */
     private $authors;
 
     /**
      * @var string
-     *
+     * @Assert\Range(min="2", max="80", invalidMessage="Le pix doit être compris entre 2 et 80")
      * @ORM\Column(name="price", type="decimal", precision=4, scale=2)
      */
     private $price;
@@ -55,6 +64,18 @@ class Book
      * @ORM\JoinColumn(nullable=false)
      */
     private $publisher;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -201,5 +222,13 @@ class Book
     public function getAuthors()
     {
         return $this->authors;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersistEvent() {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 }
