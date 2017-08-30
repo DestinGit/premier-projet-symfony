@@ -7,5 +7,14 @@
     <p>
         <a href="{{ path('book_list') }}">Retour</a>
     </p>
+    <h2>{{ book.title }}</h2>
+    <p>Edité par : {{ book.publisher.name }} le {{ book.publishedAt | date('d/m/Y') }}</p>
+    <p>Prix public : {{ book.price }}</p>
+    <h3>Auteurs : </h3>
+    <ul>
+        {% for author in book.authors %}
+            <li>{{ author.firstname }} {{ author.name }}</li>
+        {% endfor %}
+    </ul>
     {{ dump(book) }}
 {% endblock %}

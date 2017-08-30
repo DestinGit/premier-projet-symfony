@@ -231,3 +231,12 @@ Dans les class Repository c'est la que se trouveront nos requetes
 Pour créer le Schema de la bases-de-donnees
 > php bin/console doctrine:schema:create
 si modification sur le schema, faire > php bin/console doctrine:schema:update --force
+
+
+
+
+
+
+
+
+php bin/console doctrine:schema:drop --force

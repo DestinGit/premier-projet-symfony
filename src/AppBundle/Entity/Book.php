@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,11 +30,10 @@ class Book
     private $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author_name", type="string", length=50)
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Author", inversedBy="books", cascade={"persist"})
      */
-    private $author;
+    private $authors;
 
     /**
      * @var string
@@ -49,6 +49,12 @@ class Book
      */
     private $publishedAt;
 
+    /**
+     * @var Publisher
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Publisher", inversedBy="books", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $publisher;
 
     /**
      * Get id
@@ -82,30 +88,6 @@ class Book
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Book
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -155,5 +137,69 @@ class Book
     {
         return $this->publishedAt;
     }
-}
 
+    /**
+     * Set publisher
+     *
+     * @param \AppBundle\Entity\Publisher $publisher
+     *
+     * @return Book
+     */
+    public function setPublisher(\AppBundle\Entity\Publisher $publisher)
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    /**
+     * Get publisher
+     *
+     * @return \AppBundle\Entity\Publisher
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add author
+     *
+     * @param \AppBundle\Entity\Author $author
+     *
+     * @return Book
+     */
+    public function addAuthor(\AppBundle\Entity\Author $author)
+    {
+        $this->authors[] = $author;
+
+        return $this;
+    }
+
+    /**
+     * Remove author
+     *
+     * @param \AppBundle\Entity\Author $author
+     */
+    public function removeAuthor(\AppBundle\Entity\Author $author)
+    {
+        $this->authors->removeElement($author);
+    }
+
+    /**
+     * Get authors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+}
